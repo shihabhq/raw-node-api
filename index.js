@@ -4,25 +4,25 @@
 
 // dependencise:
 const http = require("http");
-const {handleRequest} = require('./helpers/handleRequest')
+const { handleRequest } = require("./helpers/handleRequest");
+const environment = require('./helpers/environments')
+const data = require('./lib/data')
+// testing the data
+
 
 // app object - module Scaffolding
 const app = {};
 
-// configuration
-app.config = {
-  port: 3000,
-};
+app.handleRequest = handleRequest;
 
 // establishing external server
 app.createServer = () => {
   const server = http.createServer(app.handleRequest);
-  server.listen(app.config.port, () => {
-    console.log("listening from the code " + app.config.port);
+  server.listen(environment.port, () => {
+    console.log("listening from the code " + environment.port);
   });
 };
 
-app.handleRequest = handleRequest;
 
 // managing response of that server
-app.createServer(3000)
+app.createServer();
