@@ -3,7 +3,7 @@
 //dependencies
 const data = require("../../lib/data");
 const { hashPass } = require("../../helpers/utilities");
-const { createRandStr } = require("../../helpers/utilities");
+const { createRandStr,parsedJson } = require("../../helpers/utilities");
 
 //const { hashPass } = require("../../helpers/utilities");
 
@@ -39,7 +39,8 @@ handler._token.post = (requestProperties, callBack) => {
   if (phone && password) {
     data.read("users", phone, (err, userData) => {
       let hashedPassword = hashPass(password);
-      if (hashedPassword === userData.password) {
+      console.log('hi')
+      if (hashedPassword === parsedJson(userData).password) {
         let tokenId = createRandStr(20);
         let expireToken = Date.now() * 60 * 60 * 1000;
         const tokenObj = {
@@ -72,7 +73,32 @@ handler._token.post = (requestProperties, callBack) => {
 };
 
 //TODO: authentication left
-handler._token.get = (requestProperties, callBack) => {};
+handler._token.get = (requestProperties, callBack) => {
+   //check whether the id is valid
+   const id =
+   typeof requestProperties.queryObj.id === "string" &&
+   requestProperties.queryObj.id.trim().length === 20
+     ? requestProperties.queryObj.id
+     : false;
+
+ if (id) {
+   //look up the token
+   data.read("tokens", id, (err, tData) => {
+     const token = { ...parsedJson(tData) };
+     if (!err && token) {
+       callBack(200, token);
+     } else {
+       callBack(404, {
+         error: "requested token not found",
+       });
+     }
+   });
+ } else {
+   callBack(404, {
+     error: "requested token not found1",
+   });
+ }
+};
 
 handler._token.put = (requestProperties, callBack) => {};
 handler._token.delete = (requestProperties, callBack) => {};
