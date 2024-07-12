@@ -9,5 +9,8 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "twilio": "^5.2.2"
+  }
 }
