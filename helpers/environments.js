@@ -9,8 +9,8 @@ environments.staging = {
   maxChecks: 5,
   twilio: {
     fromPhone: "+12513697195",
-    accountSid: "AC0a19d0a3267c2725b53aeeae336d27d7",
-    authtToken: "5e5233524118c1e5280a332e769c9d5c",
+    accountSid: "twilio SID",
+    authtToken: "twilio token",
   },
 };
 
