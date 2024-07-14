@@ -1,3 +1,6 @@
+// title: random sample handling page
+// des: a page that is made to test the handling routes success
+
 // scaffolding module
 const handler = {};
 

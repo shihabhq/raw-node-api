@@ -1,3 +1,6 @@
+// title: user handler page
+// des: handles user related functions is given here
+
 //dependencies
 const data = require("../../lib/data");
 const { hashPass } = require("../../helpers/utilities");

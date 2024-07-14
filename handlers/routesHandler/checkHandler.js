@@ -1,3 +1,6 @@
+// title: check handling page
+// des: routes related
+
 //dependencies
 const data = require("../../lib/data");
 const { createRandStr } = require("../../helpers/utilities");
